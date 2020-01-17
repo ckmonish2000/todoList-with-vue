@@ -1,7 +1,7 @@
 <template>
   <div class="bodyparent">
     <div v-for="x in dta" :key="x.id">
-<Item :itm="x" />
+<Item :itm="x" v-on:delete-todo="$emit('deletes',x.todoid)"/>
     </div>
   </div>
 </template>

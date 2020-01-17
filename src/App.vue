@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-   <Data :set="todos"/>
-   <Body class="bdy" :dta="todos"/>
+   <Data :set="todos" @add-new="addTodos"/>
+   <Body class="bdy" :dta="todos" v-on:deletes="hello"/>
   </div>
 </template>
 
@@ -32,9 +32,18 @@ export default {
         }
       ]
     }
+  },
+  methods:{
+    hello(todoid){
+      this.todos=this.todos.filter(todo=>todo.todoid!=todoid)
+    },
+    addTodos(newtodo){
+      this.todos.push(newtodo)
+    }
+    }
   }
 
-}
+
 </script>
 
 <style>

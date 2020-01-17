@@ -1,7 +1,10 @@
 <template>
   <div class="heading">
       <h2 class="title">Todo List</h2>
-      <button class="reset" @click="reset"> reset</button>
+      <div class="adds">
+      <input type="text" class="add" v-model="todo" placeholder="add todos...">
+      <button class="reset" @click="adds">submit</button>
+      </div>
   </div>
 </template>
 
@@ -10,18 +13,34 @@
 export default {
     name:"header",
     props:["set"],
+    data(){
+        return{
+            tool:"",
+            Id:0
+        }
+    },
     methods:{
-        reset:function(){
-            this.set.completed=false;
+        adds:function(e){
+            e.preventDefault();
+            const newtodo={
+                id: this.Id+1,
+                title:this.tool
+            }
+            this.Id=this.Id+1;
+            this.$emit("add-new",newtodo)
+
+
         }
     }
-}
+    }
+
 </script>
 
 <style>
 .heading{
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     border-bottom: 2px grey groove;
     text-align: center;
 }
@@ -41,6 +60,15 @@ export default {
     box-shadow: 2px 2px black;
     transition: 0.5s;
 }
+.add{
+    height: 30px;
+    margin-top: auto;
+    margin-left:auto;
+    margin-bottom: auto;
+    width: 400px;
+    
+}
+
 </style>
 
 
